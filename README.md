@@ -27,8 +27,8 @@
 
 <script>
     const NOME_PIZZARIA = "BLACK PIZZARIA";
-    const WHATSAPP_NUMERO = "5511982416568"; 
-    const CHAVE_PIX = "5511982416568";
+    const WHATSAPP_NUMERO = "5511986635336"; 
+    const CHAVE_PIX = "5511986635336";
 
     const TAXAS_ENTREGA = {
         "Vila Rosina": 4.00,
