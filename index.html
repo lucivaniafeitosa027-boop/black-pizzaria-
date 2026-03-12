@@ -13,7 +13,7 @@
         .btn-gold { background: var(--ouro); color: #000; font-weight: bold; border-radius: 6px; padding: 10px; width: 100%; cursor: pointer; border: none; transition: 0.3s; }
         .btn-gold:active { transform: scale(0.95); opacity: 0.8; }
         .aba-ativa { border-bottom: 2px solid var(--ouro); color: var(--ouro); font-weight: bold; }
-        input, select { background: #181818 !important; border: 1px solid #333 !important; color: white !important; outline: none; }
+        input, select, textarea { background: #181818 !important; border: 1px solid #333 !important; color: white !important; outline: none; }
         
         .step { display: none; overflow-y: auto; max-height: 70vh; }
         .step.active { display: block; }
@@ -46,7 +46,7 @@
     const PRODUTOS = [
         { id: 99, nome: "PIZZA MEIO A MEIO", preco: 55.00, categoria: "Tradicionais", descricao: "ESCOLHA DOIS SABORES (Exceto Gourmet).", especial: "meio-a-meio" },
         { id: 1, nome: "Black", preco: 55.00, categoria: "Tradicionais", descricao: "MOLHO, MUSSARELA, CALABRESA, PRESUNTO, BACON, AZEITONA, CEBOLA , TOMATE E ORÉGANO." },
-        { id: 2, nome: "PORTUGUESA", preco: 55.00, categoria: "Tradicionais", descricao: "MOLHO, MUSSARELA, PRESUNTO, OVO, BACON, PALMITO, AZEITONA, CEBOLA, TOMATE E OREGANO." },
+        { id: 2, nome: "PORTUGUESA", preco: 55.00, categoria: "Tradicionais", descricao: "MOLHO, MUSSARELA, PRESUNTO, OVO, BACON, PALMITO, AZEITONA,CEBOLA, TOMATE E OREGANO." },
         { id: 3, nome: "NAPOLITANA", preco: 55.00, categoria: "Tradicionais", descricao: "MOLHO, MUSSARELA, CALABRESA, FRANGO, BACON, CEBOLA, TOMATE E OREGANO." },
         { id: 4, nome: "BACON", preco: 55.00, categoria: "Tradicionais", descricao: "MOLHO, MUSSARELA, BACON, AZEITONA, CEBOLA, TOMATE E OREGANO." },
         { id: 5, nome: "CALABRESA", preco: 55.00, categoria: "Tradicionais", descricao: "MOLHO, MUSSARELA, CALABRESA, AZEITONA, CEBOLA,TOMATE E OREGANO.." },
@@ -70,7 +70,7 @@
 
 <div class="max-w-md mx-auto p-4 pb-32">
     <header class="text-center py-6 flex flex-col items-center">
-        <img src="https://raw.githubusercontent.com/lucivaniafeitosa027-boop/black-pizzaria-/main/WhatsApp%20Image%202026-02-21%20at%2018.02.57.jpeg" alt="Logo Black Pizzaria" class="h-32 w-32 object-cover mb-4 rounded-full shadow-lg border-2 border-[#D4AF37]">
+        <img src="https://github.com/lucivaniafeitosa027-boop/black-pizzaria-/blob/main/WhatsApp%20Image%202026-02-21%20at%2018.02.57.jpeg?raw=true" alt="Logo" class="h-32 w-auto mb-4 rounded-full shadow-lg border-2 border-[#D4AF37]">
         <h1 class="text-4xl font-black gold-text italic tracking-tighter uppercase">BLACK PIZZARIA</h1>
     </header>
 
@@ -97,7 +97,7 @@
         </div>
     </div>
     <button class="bg-yellow-600 text-black px-6 py-3 rounded-lg font-black text-[10px] uppercase italic" onclick="abrirModal()">Ver Carrinho</button>
-</div>
+</div>  
 
 <div id="modal-carrinho" class="fixed inset-0 bg-black/95 z-[60] hidden flex items-center justify-center p-4">
     <div class="bg-[#111] border border-zinc-800 w-full max-w-md rounded-2xl flex flex-col overflow-hidden relative">
@@ -107,7 +107,14 @@
                 <h2 class="gold-text font-black uppercase text-xs italic">1. Itens</h2>
                 <button onclick="fecharModal()" class="text-white text-2xl">&times;</button>
             </div>
-            <div id="itens-checkout" class="space-y-4 mb-6"></div>
+            <div id="itens-checkout" class="space-y-4 mb-4"></div>
+            
+            <div class="mb-6">
+                <label class="text-[10px] gold-text uppercase font-bold mb-2 block italic">Observações (Tirar itens, etc):</label>
+                <textarea id="obs-pedido" placeholder="Ex: Sem cebola, pizza bem assada..." 
+                    class="w-full p-3 rounded-lg text-xs bg-[#181818] border border-zinc-800 text-white outline-none h-20 resize-none"></textarea>
+            </div>
+
             <button onclick="mudarEtapa(2)" class="btn-gold uppercase text-[10px]">Próximo: Endereço</button>
         </div>
 
@@ -160,13 +167,11 @@
 
         <div id="etapa-4" class="step p-8 text-center relative">
             <button onclick="resetarTudo()" class="absolute top-2 right-4 text-white text-5xl font-light hover:text-yellow-600 transition-colors z-[999] p-2">&times;</button>
-            
             <div class="success-icon mb-6 flex justify-center mt-6">
                 <div class="h-20 w-20 bg-yellow-600 rounded-full flex items-center justify-center">
                     <svg class="h-10 w-10 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                 </div>
             </div>
-            
             <h2 class="text-2xl font-black gold-text italic uppercase mb-4">🍕 Pedido recebido com sucesso!</h2>
             <p class="text-zinc-400 text-sm leading-relaxed">
                 Obrigado por escolher a <span class="gold-text font-bold uppercase">Black Pizzaria</span> 😍<br><br>
@@ -189,6 +194,7 @@
         document.getElementById('end-nome').value = "";
         document.getElementById('end-rua').value = "";
         document.getElementById('end-ref').value = "";
+        document.getElementById('obs-pedido').value = "";
         document.getElementById('end-bairro').selectedIndex = 0;
     }
 
@@ -288,6 +294,8 @@
         const nome = document.getElementById('end-nome').value;
         const bairro = document.getElementById('end-bairro').value;
         const rua = document.getElementById('end-rua').value;
+        const observacao = document.getElementById('obs-pedido').value;
+
         if(!nome || !bairro || !rua) return alert("Preencha o endereço completo!");
 
         const sub = carrinho.reduce((acc, i) => acc + (i.preco * i.qtd), 0);
@@ -297,6 +305,11 @@
 
         let msg = `*NOVO PEDIDO - ${NOME_PIZZARIA}*\n\n`;
         carrinho.forEach(i => msg += `▪️ ${i.nome}\n`);
+        
+        if (observacao) {
+            msg += `\n📝 *Observações:* ${observacao}\n`;
+        }
+
         msg += `\n🍕 *Produtos:* R$ ${sub.toFixed(2)}\n🛵 *Entrega:* R$ ${taxa.toFixed(2)}\n💰 *TOTAL:* R$ ${(sub+taxa).toFixed(2)}`;
         msg += `\n\n💳 *Pagamento:* ${pag}${pag === "Pix" ? '\n*(Chave: '+CHAVE_PIX+')*' : ''}${pag === "Dinheiro" && troco ? ' (Troco p/ R$ '+troco+')' : ''}`;
         msg += `\n\n📍 *ENTREGA:*\n${nome}\n${rua}\nBairro: ${bairro}`;
@@ -308,5 +321,3 @@
 </script>
 </body>
 </html>
-
-
